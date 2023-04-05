@@ -15,7 +15,6 @@ func FindUserById(
 	return func(ctx context.Context, s string) (models.User, error) {
 		defer database.CloseDatabaseSession(ctx)
 
-		user, err := findByIdRepository(ctx, s)
-		return user, err
+		return findByIdRepository(ctx, s)
 	}
 }

@@ -15,7 +15,6 @@ func SaveUser(
 	return func(ctx context.Context, u models.User) error {
 		defer database.CloseDatabaseSession(ctx)
 
-		err := saveUserRepository(ctx, u)
-		return err
+		return saveUserRepository(ctx, u)
 	}
 }
