@@ -10,7 +10,6 @@ import (
 )
 
 const DatabaseName string = "user_service"
-const CtxOperationKey string = "operation_id"
 
 var mongoSessions map[string]mongo.Session
 var client *mongo.Client
@@ -31,7 +30,7 @@ func GetCollection(session mongo.Session, collectionName string) *mongo.Collecti
 }
 
 func GetSession(ctx context.Context) mongo.Session {
-	requestId := ctx.Value(common.MakeCtxKey(CtxOperationKey)).(string)
+	requestId := ctx.Value(common.MakeCtxKey(common.CtxOperationKey)).(string)
 
 	session, ok := mongoSessions[requestId]
 	if !ok {
@@ -48,7 +47,7 @@ func GetSession(ctx context.Context) mongo.Session {
 }
 
 func CloseSession(ctx context.Context) {
-	requestId := ctx.Value(common.MakeCtxKey(CtxOperationKey)).(string)
+	requestId := ctx.Value(common.MakeCtxKey(common.CtxOperationKey)).(string)
 
 	session, ok := mongoSessions[requestId]
 
